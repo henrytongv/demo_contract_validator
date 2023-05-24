@@ -1,0 +1,27 @@
+on:
+  # Trigger analysis when pushing in "main" branch. Change this to another branch if you need to
+  push:
+    branches:
+      - main
+
+name: Scanner Workflow
+jobs:
+  tmscan:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: TestMachine Scan
+      uses: testmachine-ai/github-action@main
+      with:
+        # All arguments are required
+        # TM_REPOSITORY_ID: Use an already existing repository id (in this example: 3)
+        # TM_SOURCE: The .sol file (or .zip with many .sol files inside) that you want to analyze (in this example: hello.sol)        
+        TM_REPOSITORY_ID: 3
+        TM_SOURCE: payable.sol
+      env:
+        # All env variables are required
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TM_TOKEN_KEY: ${{ secrets.TM_TOKEN_KEY }}
+        TM_API_URL: ${{ secrets.TM_API_URL }}
