@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: MIT
+// Example file from https://solidity-by-example.org/payable/
 pragma solidity ^0.8.17;
 
 contract Payable {
